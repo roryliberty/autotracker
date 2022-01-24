@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AutoModel } from "./auto.model";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'autotracker';
+  loadedAutos: AutoModel[] = [];
+
+  onSubmit(autoData: AutoModel) {
+    this.loadedAutos.push(autoData)
+    console.log(autoData);
+  }
 }
