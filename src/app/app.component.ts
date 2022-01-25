@@ -10,7 +10,7 @@ export class AppComponent {
   loadedAutos: AutoModel[] = [];
 
   onSubmit(autoData: AutoModel) {
+    // Save form data to loadedAutos array
     this.loadedAutos.push(autoData)
-    console.log(autoData);
   }
 }

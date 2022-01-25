@@ -1,23 +1,23 @@
-<div class="container">
+<!-- Form for entering automobile data-->
+<div class="container-fluid">
   <div class="row">
-    <div class="col-12-sm">
+    <div class="col">
       <form #carForm="ngForm" (ngSubmit)="onSubmit(carForm.value)">
         <div class="form-group">
           <label for="year">Year: </label>
           <input type="text"
                  class="form-control"
                  id="year"
-                 ngForm
-                 name="year"
-          />
+                 ngModel
+                 name="year">
         </div>
-        <br>
+
         <div class="form-group">
           <label for="make">Make: </label>
           <input type="text"
                  id="make"
                  class="form-control"
-                 ngForm
+                 ngModel
                  name="make">
         </div>
         <br>
@@ -26,9 +26,8 @@
           <input type="text"
                  id="model"
                  class="form-control"
-                 ngForm
-                 name="model"
-          />
+                 ngModel
+                 name="model">
         </div>
         <br>
         <button type="submit"
@@ -37,12 +36,12 @@
     </div>
   </div>
 </div>
-
+<!-- If there are automobiles in the array, show them in this div -->
 <div class="row">
   <div class="col-12-sm">
     <ul class="list-group">
       <li class="list-group-item" *ngFor="let auto of loadedAutos">
-        <p>{{ auto.year }} {{ auto.model }}</p>
+        <p *ngIf="loadedAutos.length >= 1">{{ auto.year }} {{ auto.make }} {{ auto.model }}</p>
       </li>
     </ul>
   </div>
