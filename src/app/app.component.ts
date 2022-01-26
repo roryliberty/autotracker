@@ -1,6 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { AutoModel } from "./auto.model";
-import { FormBuilder, FormGroup, NgForm } from "@angular/forms";
+import { FormBuilder } from "@angular/forms";
+import { HttpClient } from "@angular/common/http";
+
+
 
 @Component({
   selector: 'app-root',
@@ -8,6 +11,7 @@ import { FormBuilder, FormGroup, NgForm } from "@angular/forms";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  // Building the form
   autoForm = this.fb.group({
     year: [''],
     make: [''],
@@ -15,10 +19,17 @@ export class AppComponent {
   })
   loadedAutos: AutoModel[] = [];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private http: HttpClient) {
   }
 
   onSubmit(auto: AutoModel) {
+    // Send Http request
+    this.http.post("https://autotracker-da6d9-default-rtdb.firebaseio.com/posts.json", auto)
+      .subscribe(posts => {
+        // Log the response data to the console
+        console.log(posts);
+      });
     // Save form data to loadedAutos array
     this.loadedAutos.push(auto);
     // Clear form fields
