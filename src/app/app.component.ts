@@ -1,16 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AutoModel } from "./auto.model";
 import { FormBuilder } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
-
-
+import { map } from "rxjs/operators";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   // Building the form
   autoForm = this.fb.group({
     year: [''],
@@ -23,6 +22,10 @@ export class AppComponent {
               private http: HttpClient) {
   }
 
+  ngOnInit() {
+    this.fetchData();
+  }
+
   onSubmit(auto: AutoModel) {
     // Send Http request
     this.http.post("https://autotracker-da6d9-default-rtdb.firebaseio.com/posts.json", auto)
@@ -30,12 +33,14 @@ export class AppComponent {
         // Log the response data to the console
         console.log(posts);
       });
-    // Save form data to loadedAutos array
-    this.loadedAutos.push(auto);
     // Clear form fields
     this.autoForm.reset();
     // log to console
     console.log(this.loadedAutos);
+  }
+
+  onFetchData() {
+    this.fetchData();
   }
 
   onClear() {
@@ -45,5 +50,25 @@ export class AppComponent {
     this.loadedAutos.splice(0);
     // log to console
     console.log(this.loadedAutos);
+  }
+
+  private fetchData() {
+    // Send Http request
+    this.http.get<{ [key: string]: AutoModel }>("https://autotracker-da6d9-default-rtdb.firebaseio.com/posts.json")
+      .pipe(
+        map((responseData: { [key: string]: any })  => {
+          const dataArray: AutoModel[] = [];
+          for(const key in responseData) {
+            if(responseData.hasOwnProperty(key)) {
+              dataArray.push({ ...responseData[key], id: key });
+            }
+          }
+          return dataArray;
+        })
+      )
+      .subscribe(posts => {
+        // ...
+        this.loadedAutos = posts;
+    });
   }
 }
