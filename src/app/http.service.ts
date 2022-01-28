@@ -22,7 +22,7 @@ export class HttpService {
     // Send Http request
     return this.http.get<{ [key: string]: AutoModel }>("https://autotracker-da6d9-default-rtdb.firebaseio.com/posts.json")
       .pipe(
-        map((responseData: { [key: string]: any })  => {
+        map((responseData: { [key: string]: AutoModel })  => {
           const dataArray: AutoModel[] = [];
           for(const key in responseData) {
             if(responseData.hasOwnProperty(key)) {
@@ -32,5 +32,10 @@ export class HttpService {
           return dataArray;
         })
       )
+  }
+
+  clearData() {
+    // Sent Http request
+    return this.http.delete("https://autotracker-da6d9-default-rtdb.firebaseio.com/posts.json");
   }
 }

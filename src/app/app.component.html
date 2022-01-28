@@ -53,8 +53,14 @@
       <hr>
     </div>
   </div>
+
+  <!-- If there are no automobiles in the array, show this message -->
+  <div class="row" *ngIf="loadedAutos.length < 1">
+    <p>No data to display!</p>
+  </div>
+
   <!-- If there are automobiles in the array, show them in this table -->
-  <div class="row">
+  <div class="row" *ngIf="loadedAutos.length >= 1">
     <div class="col">
       <table class="table table-dark table-striped">
         <thead>

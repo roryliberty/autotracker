@@ -27,7 +27,6 @@ export class AppComponent implements OnInit {
     this.dataGetter();
   }
 
-
   onSubmit(auto: AutoModel) {
     // To http.service.ts
     this.httpService.postData(auto);
@@ -40,10 +39,11 @@ export class AppComponent implements OnInit {
   }
 
   onClear() {
-    // Clear form fields
-    this.autoForm.reset();
-    // Clear loadedAutos array
-    this.loadedAutos.splice(0);
+    // Clear entire db
+    this.httpService.clearData().subscribe(() => {
+      // Set array to empty
+      this.loadedAutos = [];
+    });
   }
 
   private dataGetter() {
