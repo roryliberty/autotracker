@@ -44,7 +44,8 @@
                   class="btn btn-secondary mt-3 ms-3 me-3"
                   (click)="onClear()">Clear
           </button>
-          <button class="btn btn-danger mt-3 ms-3"
+          <button type="button"
+                  class="btn btn-danger mt-3 ms-3"
                   (click)="onFetchData()">Fetch Data
           </button>
         </div>
@@ -52,32 +53,20 @@
       <hr>
     </div>
   </div>
-  <!-- If there are automobiles in the array, show them in this div -->
+  <!-- If there are automobiles in the array, show them in this table -->
   <div class="row">
-    <div class="col-12-sm">
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let auto of loadedAutos">
-          <p *ngIf="loadedAutos.length >= 1">{{ auto.year }} {{ auto.make }} {{ auto.model }}</p>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <hr>
-  <!-- A table to show off my Bootstrap 5 skillz -->
-  <div class="row"  *ngFor="let auto of loadedAutos">
     <div class="col">
       <table class="table table-dark table-striped">
         <thead>
         <tr>
-          <th scope="col">#</th>
+          <!-- I would like to add a column for '#' -->
           <th scope="col">Year</th>
           <th scope="col">Make</th>
           <th scope="col">Model</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <th scope="row">1</th>
+        <tr *ngFor="let auto of loadedAutos">
           <td>{{ auto.year }}</td>
           <td>{{ auto.make }}</td>
           <td>{{ auto.model }}</td>
