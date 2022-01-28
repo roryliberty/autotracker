@@ -24,8 +24,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.httpService.getData()
+    this.dataGetter();
   }
+
 
   onSubmit(auto: AutoModel) {
     // To http.service.ts
@@ -35,8 +36,7 @@ export class AppComponent implements OnInit {
   }
 
   onFetchData() {
-    // To http.service.ts
-    this.httpService.getData();
+    this.dataGetter();
   }
 
   onClear() {
@@ -44,5 +44,11 @@ export class AppComponent implements OnInit {
     this.autoForm.reset();
     // Clear loadedAutos array
     this.loadedAutos.splice(0);
+  }
+
+  private dataGetter() {
+    this.httpService.getData().subscribe(posts => {
+      this.loadedAutos = posts;
+    })
   }
 }
