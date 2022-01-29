@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { VehicleEntryComponent } from './vehicle-entry/vehicle-entry.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    VehicleEntryComponent
   ],
   imports: [
     BrowserModule,
