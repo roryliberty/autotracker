@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AutoModel } from '../auto.model';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { HttpService } from '../http.service';
 
@@ -11,12 +11,11 @@ import { HttpService } from '../http.service';
 })
 export class VehicleEntryComponent implements OnInit {
   public loadedAutos: AutoModel[] = [];
-  // Building the form
-  public autoForm: FormGroup = this.formBuilder.group({
-    year: [''],
-    make: [''],
-    model: ['']
-  })
+  public form = {
+    year: '',
+    make: '',
+    model: ''
+  }
 
   constructor(private formBuilder: FormBuilder,
               private http: HttpClient,
@@ -31,7 +30,9 @@ export class VehicleEntryComponent implements OnInit {
     // To http.service.ts
     this.httpService.postData(auto);
     // Clear form fields
-    this.autoForm.reset();
+    this.form.year = '';
+    this.form.make = '';
+    this.form.model = '';
   }
 
   onFetchData() {

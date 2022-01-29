@@ -2,15 +2,14 @@
 <div class="container-fluid" style="width: 50%; margin: 0 auto; border: solid black 2px">
   <div class="row">
     <div class="col">
-      <form [formGroup]="autoForm" (ngSubmit)="onSubmit(autoForm.value)">
+      <form #autoForm="ngForm" (ngSubmit)="onSubmit(autoForm.value)">
         <div class="form-group">
           <label class="col-form-label" for="year">Year: </label>
           <div class="col">
             <input type="text"
                    class="form-control"
                    id="year"
-                   formControlName="year"
-                   required>
+                   required name="year" [(ngModel)]="form.year">
           </div>
         </div>
 
@@ -20,8 +19,9 @@
             <input type="text"
                    id="make"
                    class="form-control"
-                   formControlName="make"
-                   required>
+                   required
+                   name="make"
+                   [(ngModel)]="form.make">
           </div>
         </div>
 
@@ -31,8 +31,9 @@
             <input type="text"
                    id="model"
                    class="form-control"
-                   formControlName="model"
-                   required>
+                   required
+                   name="model"
+                   [(ngModel)]="form.model">
           </div>
         </div>
         <div class="col">
