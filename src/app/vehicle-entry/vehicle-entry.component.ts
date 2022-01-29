@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AutoModel } from '../auto.model';
-import { FormBuilder } from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { HttpService } from '../http.service';
 
@@ -10,15 +10,15 @@ import { HttpService } from '../http.service';
   styleUrls: ['./vehicle-entry.component.css']
 })
 export class VehicleEntryComponent implements OnInit {
+  public loadedAutos: AutoModel[] = [];
   // Building the form
-  autoForm = this.fb.group({
+  public autoForm: FormGroup = this.formBuilder.group({
     year: [''],
     make: [''],
     model: ['']
   })
-  loadedAutos: AutoModel[] = [];
 
-  constructor(private fb: FormBuilder,
+  constructor(private formBuilder: FormBuilder,
               private http: HttpClient,
               private httpService: HttpService) {
   }
