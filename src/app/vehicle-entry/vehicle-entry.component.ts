@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {AutoModel} from "../auto.model";
-import {FormBuilder} from "@angular/forms";
-import {HttpClient} from "@angular/common/http";
-import {HttpService} from "../http.service";
+import { AutoModel } from '../auto.model';
+import { FormBuilder } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { HttpService } from '../http.service';
 
 @Component({
   selector: 'app-vehicle-entry',

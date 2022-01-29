@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
-import { AutoModel } from "./auto.model";
-import { map } from "rxjs/operators";
-import { HttpClient } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { AutoModel } from './auto.model';
+import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
-@Injectable({providedIn: "root"})
+@Injectable({providedIn: 'root'})
 export class HttpService {
 
   constructor(private http: HttpClient) {
@@ -11,7 +11,7 @@ export class HttpService {
 
   postData(auto: AutoModel) {
     // Send Http request
-    this.http.post("https://autotracker-da6d9-default-rtdb.firebaseio.com/posts.json", auto)
+    this.http.post('https://autotracker-da6d9-default-rtdb.firebaseio.com/posts.json', auto)
       .subscribe(posts => {
         // Log the response data to the console
         console.log(posts);
@@ -20,7 +20,7 @@ export class HttpService {
 
   getData() {
     // Send Http request
-    return this.http.get<{ [key: string]: AutoModel }>("https://autotracker-da6d9-default-rtdb.firebaseio.com/posts.json")
+    return this.http.get<{ [key: string]: AutoModel }>('https://autotracker-da6d9-default-rtdb.firebaseio.com/posts.json')
       .pipe(
         map((responseData: { [key: string]: AutoModel })  => {
           const dataArray: AutoModel[] = [];
@@ -36,6 +36,6 @@ export class HttpService {
 
   clearData() {
     // Sent Http request
-    return this.http.delete("https://autotracker-da6d9-default-rtdb.firebaseio.com/posts.json");
+    return this.http.delete('https://autotracker-da6d9-default-rtdb.firebaseio.com/posts.json');
   }
 }
