@@ -9,7 +9,8 @@
             <input type="text"
                    class="form-control"
                    id="year"
-                   required name="year" [(ngModel)]="form.year">
+                   required name="year"
+                   [(ngModel)]="form.year">
           </div>
         </div>
 
@@ -36,15 +37,18 @@
                    [(ngModel)]="form.model">
           </div>
         </div>
+
         <div class="col">
           <button type="submit"
                   class="btn btn-primary mt-3 me-3"
                   [disabled]="!autoForm.valid" >Submit
           </button>
+
           <button type="reset"
                   class="btn btn-secondary mt-3 ms-3 me-3"
                   (click)="onClear()">Clear
           </button>
+
           <button type="button"
                   class="btn btn-danger mt-3 ms-3"
                   (click)="onFetchData()">Fetch Data
@@ -54,6 +58,4 @@
       <hr>
     </div>
   </div>
-
-
 </div>
