@@ -7,11 +7,15 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { VehicleEntryComponent } from './vehicle-entry/vehicle-entry.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    VehicleEntryComponent
+    VehicleEntryComponent,
+    NavbarComponent,
+    VehicleListComponent
   ],
   imports: [
     BrowserModule,
@@ -23,4 +27,6 @@ import { VehicleEntryComponent } from './vehicle-entry/vehicle-entry.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}

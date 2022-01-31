@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AutoModel } from '../auto.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -10,12 +10,15 @@ import { HttpService } from '../http.service';
   styleUrls: ['./vehicle-entry.component.css']
 })
 export class VehicleEntryComponent implements OnInit {
+
   public loadedAutos: AutoModel[] = [];
   public form = {
     year: '',
     make: '',
     model: ''
   }
+
+
 
   constructor(private formBuilder: FormBuilder,
               private http: HttpClient,
