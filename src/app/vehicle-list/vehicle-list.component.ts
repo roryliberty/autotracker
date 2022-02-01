@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {AutoModel} from "../auto.model";
 
 @Component({
   selector: 'app-vehicle-list',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./vehicle-list.component.css']
 })
 export class VehicleListComponent implements OnInit {
+  @Input('autoList') loadedAutos: AutoModel[] = [];
 
   constructor() { }
 

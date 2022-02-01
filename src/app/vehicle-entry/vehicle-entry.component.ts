@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AutoModel } from '../auto.model';
 import { HttpClient } from '@angular/common/http';
 import { HttpService } from '../http.service';
@@ -8,8 +8,8 @@ import { HttpService } from '../http.service';
   templateUrl: './vehicle-entry.component.html',
   styleUrls: ['./vehicle-entry.component.css']
 })
-export class VehicleEntryComponent implements OnInit {
-  public loadedAutos: AutoModel[] = [];
+export class VehicleEntryComponent {
+  @Input('autoList') public loadedAutos: AutoModel[] = [];
   public form = {
     year: '',
     make: '',
@@ -20,11 +20,6 @@ export class VehicleEntryComponent implements OnInit {
               private httpService: HttpService) {
   }
 
-  ngOnInit() {
-    // Get list of vehicles from Firebase
-    this.dataGetter();
-  }
-
   onSubmit(auto: AutoModel) {
     // Post vehicle to Firebase
     this.httpService.postData(auto);
@@ -32,11 +27,13 @@ export class VehicleEntryComponent implements OnInit {
     this.form.year = '';
     this.form.make = '';
     this.form.model = '';
+    // log to console
+    console.log(this.loadedAutos);
   }
 
+  // TODO: What do I do with onFetchData here?
   onFetchData() {
-    // Get list of vehicles from Firebase
-    this.dataGetter();
+
   }
 
   onClear() {
@@ -45,13 +42,5 @@ export class VehicleEntryComponent implements OnInit {
       // Set array to empty
       this.loadedAutos = [];
     });
-  }
-
-  private dataGetter() {
-    // Get list of vehicles from Firebase
-    this.httpService.getData().subscribe(posts => {
-      // Save list of vehicles to array
-      this.loadedAutos = posts;
-    })
   }
 }
