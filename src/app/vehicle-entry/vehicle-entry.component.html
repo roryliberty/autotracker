@@ -1,4 +1,4 @@
-<!-- Form for entering automobile data-->
+<!-- Form for entering automobile data -->
 <div class="container-fluid" style="width: 50%; margin: 0 auto; border: solid black 2px">
   <div class="row">
     <div class="col">
@@ -9,7 +9,8 @@
             <input type="text"
                    class="form-control"
                    id="year"
-                   required name="year"
+                   required
+                   name="year"
                    [(ngModel)]="form.year">
           </div>
         </div>
@@ -56,6 +57,11 @@
         </div>
       </form>
       <hr>
+    </div>
+    <div class="row">
+      <div class="col">
+        <app-vehicle-list *ngIf="showList" [autoList]="loadedAutos"></app-vehicle-list>
+      </div>
     </div>
   </div>
 </div>

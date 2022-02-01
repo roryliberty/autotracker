@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { VehicleEntryComponent } from './vehicle-entry/vehicle-entry.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
-import { VehicleItemComponent } from './vehicle-list/vehicle-item/vehicle-item.component';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +17,6 @@ import { VehicleItemComponent } from './vehicle-list/vehicle-item/vehicle-item.c
     VehicleEntryComponent,
     NavbarComponent,
     VehicleListComponent,
-    VehicleItemComponent
   ],
   imports: [
     BrowserModule,

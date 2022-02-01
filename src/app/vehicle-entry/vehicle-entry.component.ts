@@ -1,25 +1,31 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { AutoModel } from '../auto.model';
-import { HttpClient } from '@angular/common/http';
 import { HttpService } from '../http.service';
 
 @Component({
   selector: 'app-vehicle-entry',
   templateUrl: './vehicle-entry.component.html',
-  styleUrls: ['./vehicle-entry.component.css']
+  styleUrls: ['./vehicle-entry.component.css'],
 })
-export class VehicleEntryComponent {
+export class VehicleEntryComponent implements OnInit {
   @Input('autoList') public loadedAutos: AutoModel[] = [];
   public form = {
     year: '',
     make: '',
     model: ''
   }
+  public showList: boolean = false;
 
-  constructor(private http: HttpClient,
-              private httpService: HttpService) {
+  constructor(private httpService: HttpService) {
   }
 
+  ngOnInit() {
+
+  }
+
+  /**
+   * Post vehicle to Firebase and clear form fields
+   */
   onSubmit(auto: AutoModel) {
     // Post vehicle to Firebase
     this.httpService.postData(auto);
@@ -27,13 +33,13 @@ export class VehicleEntryComponent {
     this.form.year = '';
     this.form.make = '';
     this.form.model = '';
-    // log to console
-    console.log(this.loadedAutos);
   }
 
-  // TODO: What do I do with onFetchData here?
+  /**
+   * Show vehicle-list component
+   */
   onFetchData() {
-
+    this.showList = true;
   }
 
   onClear() {
@@ -42,5 +48,6 @@ export class VehicleEntryComponent {
       // Set array to empty
       this.loadedAutos = [];
     });
+    this.showList = false;
   }
 }
