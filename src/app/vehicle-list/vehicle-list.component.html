@@ -1,10 +1,10 @@
 <!-- If there are no automobiles in the array, show this message -->
-<div class="row" *ngIf="loadedAutos.length < 1">
+<div class="row" *ngIf="listLoadedAutos.length < 1">
   <p>No data to display!</p>
 </div>
 
 <!-- If there are automobiles in the array, show them in this table -->
-<div class="row" *ngIf="loadedAutos.length >= 1">
+<div class="row" *ngIf="listLoadedAutos.length >= 1">
   <div class="col">
     <table class="table table-dark table-striped">
       <thead>
@@ -16,7 +16,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let auto of loadedAutos">
+      <tr *ngFor="let auto of listLoadedAutos">
         <td>{{ auto.year }}</td>
         <td>{{ auto.make }}</td>
         <td>{{ auto.model }}</td>

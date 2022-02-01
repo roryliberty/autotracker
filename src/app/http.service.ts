@@ -6,9 +6,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({providedIn: 'root'})
 export class HttpService {
 
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private http: HttpClient) { }
 
   postData(auto: AutoModel) {
     // Send Http request

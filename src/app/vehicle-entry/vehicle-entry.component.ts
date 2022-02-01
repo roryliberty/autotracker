@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AutoModel } from '../auto.model';
 import { HttpService } from '../http.service';
 
@@ -7,20 +7,18 @@ import { HttpService } from '../http.service';
   templateUrl: './vehicle-entry.component.html',
   styleUrls: ['./vehicle-entry.component.css'],
 })
-export class VehicleEntryComponent implements OnInit {
-  @Input('autoList') public loadedAutos: AutoModel[] = [];
+export class VehicleEntryComponent  {
+  @Input('autoList') public entryLoadedAutos: AutoModel[] = [];
+  /**
+   * Structure of the form
+   */
   public form = {
     year: '',
     make: '',
     model: ''
   }
-  public showList: boolean = false;
 
   constructor(private httpService: HttpService) {
-  }
-
-  ngOnInit() {
-
   }
 
   /**
@@ -36,18 +34,26 @@ export class VehicleEntryComponent implements OnInit {
   }
 
   /**
-   * Show vehicle-list component
+   * Get list of vehicles from Firebase
+   * Update the table in vehicle-list template
    */
   onFetchData() {
-    this.showList = true;
+    // Get list of vehicles from Firebase
+      this.httpService.getData().subscribe(posts => {
+    // Save list of vehicles to array
+        this.entryLoadedAutos = posts;
+      });
   }
 
+  /**
+   * Clear entire list of vehicles on Firebase
+   * Set entryLoadedAutos array to empty
+   */
   onClear() {
     // Clear entire list of vehicles on Firebase
     this.httpService.clearData().subscribe(() => {
       // Set array to empty
-      this.loadedAutos = [];
+      this.entryLoadedAutos = [];
     });
-    this.showList = false;
   }
 }
