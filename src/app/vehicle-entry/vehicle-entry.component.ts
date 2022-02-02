@@ -1,16 +1,15 @@
-import {Component, Input, OnDestroy} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AutoModel } from '../auto.model';
 import { HttpService } from '../http.service';
-import {Subscription} from "rxjs";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-vehicle-entry',
   templateUrl: './vehicle-entry.component.html',
   styleUrls: ['./vehicle-entry.component.css'],
 })
-export class VehicleEntryComponent implements OnDestroy {
-  // TODO: Does the Input decorator need to be here?
-  @Input('autoList') public entryLoadedAutos: AutoModel[] = [];
+export class VehicleEntryComponent {
+  public entryLoadedAutos: AutoModel[] = [];
   /**
    * Structure of the form
    */
@@ -19,14 +18,8 @@ export class VehicleEntryComponent implements OnDestroy {
     make: '',
     model: ''
   }
-  public activeSubscription: Subscription = new Subscription();
 
-  constructor(private httpService: HttpService) {
-  }
-
-  ngOnDestroy() {
-    this.activeSubscription.unsubscribe();
-  }
+  constructor(private httpService: HttpService) { }
 
   /**
    * Post vehicle to Firebase and clear form fields
@@ -46,10 +39,7 @@ export class VehicleEntryComponent implements OnDestroy {
    */
   onFetchData() {
     // Get list of vehicles from Firebase
-      this.activeSubscription = this.httpService.getData().subscribe(posts => {
-    // Save list of vehicles to array
-        this.entryLoadedAutos = posts;
-      });
+    this.httpService.getData();
   }
 
   /**

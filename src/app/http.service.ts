@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { AutoModel } from './auto.model';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import {Subject} from "rxjs";
 
 @Injectable({providedIn: 'root'})
 export class HttpService {
+  public loadedAutos: Subject<AutoModel[]> = new Subject<AutoModel[]>();
 
   constructor(private http: HttpClient) { }
 
@@ -25,8 +27,8 @@ export class HttpService {
           const dataArray: AutoModel[] = [];
           for(const key in responseData) {
             if(responseData.hasOwnProperty(key)) {
-              dataArray.push({ ...responseData[key], id: key });
-            }
+             dataArray.push({ ...responseData[key], id: key });
+           }
           }
           return dataArray;
         })
