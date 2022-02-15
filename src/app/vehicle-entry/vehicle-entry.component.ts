@@ -1,14 +1,13 @@
-import { Component, Input } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { AutoModel } from '../auto.model';
 import { HttpService } from '../http.service';
-import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-vehicle-entry',
   templateUrl: './vehicle-entry.component.html',
   styleUrls: ['./vehicle-entry.component.css'],
 })
-export class VehicleEntryComponent {
+export class VehicleEntryComponent implements OnInit {
   public entryLoadedAutos: AutoModel[] = [];
   /**
    * Structure of the form
@@ -20,6 +19,10 @@ export class VehicleEntryComponent {
   }
 
   constructor(private httpService: HttpService) { }
+
+  ngOnInit() {
+    this.onFetchData();
+  }
 
   /**
    * Post vehicle to Firebase and clear form fields
@@ -39,7 +42,10 @@ export class VehicleEntryComponent {
    */
   onFetchData() {
     // Get list of vehicles from Firebase
-    this.httpService.getData();
+    this.httpService.getData().subscribe(posts => {
+      this.entryLoadedAutos = posts;
+      console.log(posts)
+    });
   }
 
   /**
