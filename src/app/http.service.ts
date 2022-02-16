@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AutoModel } from './auto.model';
-import { map } from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from "rxjs";
 
@@ -39,4 +39,13 @@ export class HttpService {
     // Sent Http request
     return this.http.delete('https://autotracker-da6d9-default-rtdb.firebaseio.com/posts.json');
   }
+
+  getAuto(id: number) {
+    return this.http.get<{ auto: AutoModel }>('https://autotracker-da6d9-default-rtdb.firebaseio.com/posts/`${ id }`.json')
+      .pipe(tap(() => {
+        console.log('fetched auto ' + `${id}`);
+      }))
+  }
 }
+
+
